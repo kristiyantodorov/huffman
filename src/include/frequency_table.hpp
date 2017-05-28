@@ -11,16 +11,23 @@
 #include <string>
 #include <iostream>
 
+
+struct Counter {
+	Counter();
+	long cnt_table[256];
+};
+
+
 class FrequencyTable {
 public:
 	FrequencyTable();
 	void print();
 	void generate_table(const std::string& str);
+	void generate_table(const std::string& str, const int num_threads);
 
 private:
-	int table[256];
+	unsigned long long table[256];
+	void counter_thread(const long begin, const long size, const std::string& str, Counter& c_arr);
 };
-
-
 
 #endif /* SRC_INCLUDE_FREQUENCY_TABLE_HPP_ */
