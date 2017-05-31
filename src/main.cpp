@@ -21,15 +21,20 @@ int main(int argc, char* argv[]) {
 
 	std::ifstream file("input.txt");
 	std::string str;
-	getline(file, str);
 
-	FrequencyTable table;
+    FrequencyTable table;
+
 	gettimeofday(&start, NULL);
-	if( num_threads == 1 ) {
-		table.generate_table(str);
-	} else {
-		table.generate_table(str, num_threads);
-	}
+	while (getline(file, str)) {
+        std::cout << "Row" << std::endl;
+
+        if( num_threads == 1 ) {
+            table.generate_table(str);
+        } else {
+            table.generate_table(str, num_threads);
+        }
+    }
+
 	gettimeofday(&end, NULL);
 	table.print();
 

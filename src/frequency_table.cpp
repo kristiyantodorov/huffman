@@ -4,6 +4,7 @@
 #include <vector>
 
 std::mutex mtx;
+int num_of_working_threads;
 
 Counter::Counter() {
 	memset(cnt_table, 0, sizeof(cnt_table));
@@ -23,6 +24,7 @@ void FrequencyTable::counter_thread(const long begin, const long size, const std
 #ifdef DEBUG
 	printf("Begin: %ld, Size %ld, End: %ld\n", begin, size, begin+size-1);
 #endif
+	num_of_working_threads++;
 
 	for(auto i = begin; i < begin+size; i++) {
 		c_arr.cnt_table[(int)str[i]]++;
@@ -33,6 +35,9 @@ void FrequencyTable::counter_thread(const long begin, const long size, const std
 		table[i] += c_arr.cnt_table[i];
 	}
 	mtx.unlock();
+
+    printf("Thread finished\n");
+	num_of_working_threads--;
 }
 
 void FrequencyTable::generate_table(const std::string& str, const int num_threads) {
@@ -52,7 +57,7 @@ void FrequencyTable::generate_table(const std::string& str, const int num_thread
 
 	for(auto i = 0; i < num_threads; i++) {
 #ifdef DEBUG
-		std::cout << "Starting thread " << i << std::endl;
+		std::cout << "Starting thread " << std::endl;
 #endif
 		if( i == num_threads-1 ) {
 			threads.push_back(std::thread(&FrequencyTable::counter_thread, this, i*piece, last_piece, str, std::ref(counter_array[i])));
