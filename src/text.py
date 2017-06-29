@@ -1,2 +1,4 @@
 str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-print str * 40000000
+
+for i in range(1, 100000):
+    print str * 100

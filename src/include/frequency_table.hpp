@@ -20,14 +20,16 @@ struct Counter {
 
 class FrequencyTable {
 public:
-	FrequencyTable();
+	FrequencyTable(bool quiet_mode);
 	void print();
 	void generate_table(const std::string& str);
 	void generate_table(const std::string& str, const int num_threads);
 
+	bool quiet_mode;
+
 private:
 	unsigned long long table[256];
-	void counter_thread(const long begin, const long size, const std::string& str, Counter& c_arr);
+	void counter_thread(const long begin, const long size, const std::string& str, Counter& c_arr, int number);
 };
 
 #endif /* SRC_INCLUDE_FREQUENCY_TABLE_HPP_ */

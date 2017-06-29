@@ -21,8 +21,8 @@ CFLAGS = -Wall \
 
 LDFLAGS = -Wall \
 				  -g \
+				  -fPIC \
 				  -pthread \
-					-static-libstdc++ \
 
 $(BIN)/%.o: %.cpp
 	$(CXX) $(CFLAGS)  $(INCPATH) -o $@ $<
