@@ -2,7 +2,7 @@ CXX = g++
 
 INCPATH = -I./include \
 
-DEPS = ./include/frequency_table.hpp
+DEPS = ./frequency_table.hpp
 
 ifndef DEBUG
 	DEBUG=NO

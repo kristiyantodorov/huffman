@@ -13,21 +13,21 @@
 
 
 struct Counter {
-	Counter();
-	long cnt_table[256];
+    Counter();
+    long cnt_table[256];
 };
 
 
 class FrequencyTable {
 public:
-	FrequencyTable();
-	void print();
-	void generate_table(const std::string& str);
-	void generate_table(const std::string& str, const int num_threads);
+    FrequencyTable();
+    void print();
+    void generate_table(const std::string& str);
+    void generate_table(const std::string& str, const int num_threads);
 
 private:
-	unsigned long long table[256];
-	void counter_thread(const long begin, const long size, const std::string& str, Counter& c_arr);
+    unsigned long long table[256];
+    void counter_thread(const long begin, const long size, const std::string& str, Counter& c_arr);
 };
 
 #endif /* SRC_INCLUDE_FREQUENCY_TABLE_HPP_ */
